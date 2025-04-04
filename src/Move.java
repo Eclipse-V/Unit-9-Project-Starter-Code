@@ -3,17 +3,47 @@ public class Move{
     int power;
     String type;
     private int accuracyPercentage;
+    int level;
     
-    public Move(String n, int p, String t, int a){
+    public Move(String n, int p, String t, int a, int l){
       this.name = n;
       this.power = p;
       this.type = t;
       this.accuracyPercentage = a;
+        this.level = l;
     }
   
     public int getPower(){
-      System.out.println(this.name + "!");
-      return this.power;
+        /*int critHitRanNum = (int) (Math.random() * 4) + 1;
+        double critChance = 0.0;
+        if (level == 1){
+          critChance = 0.0625;
+        }
+        else if(level == 2){
+          critChance = 0.125;
+        }
+        else if(level == 3){
+          critChance = 0.25;
+        }
+        else{
+          critChance = 0.5;
+        }*/
+        int randomNum = (int) (Math.random() * 100) + 1;
+        if(randomNum <= AccuracyPercentage()){
+            if((double) (Math.random() * 1000) + 1 < critChance){
+                power *= 1.5;
+                System.out.println("Critical hit!");
+                System.out.println(this.name + "!");
+                return this.power;
+            }
+            else{
+                System.out.println(this.name + "!");
+                return this.power;
+            }
+          }
+        else{
+            return System.out.println(name + " missed!");
+        }
     }
 
     public int getAccuracyPercentage(){
@@ -26,23 +56,6 @@ public class Move{
 
     public String getMoveType(){
       return this.type;
-    }
-
-    public void criticalHit(){
-      int critHitRanNum = (int) (Math.random() * 4) + 1;
-      double critChance = 0.0;
-      if (critHitRanNum == 1){
-        critChance = 0.0625;
-      }
-      else if(critHitRanNum == 2){
-          critChance = 0.125;
-      }
-      else if(critHitRanNum == 3){
-        critChance = 0.25;
-      }
-      else{
-        critChance = 0.5;
-      }
     }
 
     public String toString(){
