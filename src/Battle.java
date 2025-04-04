@@ -32,13 +32,42 @@ public class Battle{
   }
 
   public void turn(Pokemon a, Pokemon b){
+    int damage = 0;
     System.out.println(a + "'s turn!");
+
         Move move = moveChoice(a);
         int power = move.getPower();
-        int damage = (int)(power * ((double)a.getAttack())/b.getDefense());
-        System.out.println(b + " took " + damage + " damage.");
-        b.damage(damage);
-        System.out.println(b + " has " + Math.max(b.getHp(), 0) + " hit points left."); 
+        int randomNum = (int) (Math.random() * 100) + 1;
+
+        int critHitRanNum = (int) (Math.random() * 4) + 1;
+        double critChance = 0.0;
+        if (critHitRanNum == 1){
+          critChance = 0.0625;
+        }
+        else if(critHitRanNum == 2){
+          critChance = 0.125;
+        }
+        else if(critHitRanNum == 3){
+          critChance = 0.25;
+        }
+        else{
+          critChance = 0.5;
+        }
+
+
+        if (randomNum <= move.getAccuracyPercentage()){
+          damage = (int)(power * ((double)a.getAttack())/b.getDefense());
+          if((double) (Math.random() * 4) + 1 < critChance){
+            damage *= 1.5;
+            System.out.println("Critical hit!");
+          }
+          System.out.println(b + " took " + damage + " damage.");
+          b.damage(damage);
+          System.out.println(b + " has " + Math.max(b.getHp(), 0) + " hit points left."); 
+        }
+        else{
+          System.out.println(move.getName() + " missed!");
+        }
   }
 
   public void start(){
