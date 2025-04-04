@@ -30,7 +30,7 @@ public class Move{
         }*/
         int randomNum = (int) (Math.random() * 100) + 1;
         if(randomNum <= AccuracyPercentage()){
-            if((double) (Math.random() * 1000) + 1 < critChance){
+            if((double) (Math.random() * 1) + 1 < critChance){
                 power *= 1.5;
                 System.out.println("Critical hit!");
                 System.out.println(this.name + "!");
