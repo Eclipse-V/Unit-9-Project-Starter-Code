@@ -24,6 +24,14 @@ public class Move{
                                  {1,2,1,1,1,1,0.5,0.5,1,1,1,1,1,0,1,1,0.5,2},
                                  {1,0.5,1,2,1,1,1,1,1,2,1,1,1,1,1,1,0,0.5,1}};
     
+    public Move(String n, int p, String t){
+      this.name = n;
+      this.power = p;
+      this.type = t;
+      this.accuracyPercentage = 100;
+      this.level = 1;
+    }
+
     public Move(String n, int p, String t, int a, int l){
       this.name = n;
       this.power = p;
@@ -32,9 +40,8 @@ public class Move{
       this.level = l;
     }
   
-    public int getPower(){
-        int critHitRanNum = (int) (Math.random() * 4) + 1;
-        double critChance = 0.0;
+    public double critChance(){
+      double critChance = 0.0;
         if (level == 1){
           critChance = 6.25;
         }
@@ -47,23 +54,42 @@ public class Move{
         else{
           critChance = 50;
         }
+        return critChance;
+    }
+
+    public int getPower(){
+      critChance();
         int randomNum = (int) (Math.random() * 100) + 1;
         if(randomNum <= accuracyPercentage){
-            if((double) (Math.random() * 100) + 1 < critChance){
+            if((double) (Math.random() * 100) + 1 < critChance()){
                 power *= 1.5;
                 System.out.println(this.name + "!" + " It's a critical hit!");
-                return this.power;
             }
             else{
                 System.out.println(this.name + "!");
-                return this.power;
             }
           }
         else{
             System.out.println(this.name + " missed!");
-            return 0;
+            power = 0;
         }
+        return power;
     }
+
+    public double weakness(Pokemon other){
+      int moveTypePosition = 0;
+      int oppTypePosition = 0;
+
+      for (int i = 0; i < types.length; i++){
+        if(types[i].equals(this.type)){
+          moveTypePosition = i;
+        }
+        if(types[i].equals(other.type)){
+          oppTypePosition = i;
+        }
+      }
+      return typeWeaknesses[oppTypePosition][moveTypePosition];
+    }  
 
     public int getAccuracyPercentage(){
       return this.accuracyPercentage;

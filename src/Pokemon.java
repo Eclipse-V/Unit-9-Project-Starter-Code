@@ -7,6 +7,15 @@ public class Pokemon{
     Move[] moveList;
     int speed;
   
+    public Pokemon(String n, int hp, int attack, int defense, String type, Move[] moves){
+      this.name = n;
+      this.hp = hp;
+      this.attack = attack;
+      this.defense = defense;
+      this.type = type;
+      this.moveList = moves;
+      this.speed = 50;
+    }
     public Pokemon(String n, int hp, int attack, int defense, String type, int speed, Move[] moves){
       this.name = n;
       this.hp = hp;
