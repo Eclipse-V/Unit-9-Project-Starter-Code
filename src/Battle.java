@@ -44,14 +44,30 @@ public class Battle{
   }
 
   public void start(){
+    Pokemon fasterPokemon;
+    Pokemon slowerPokemon;
+    int speedOfFirstPokemon = p1.getSpeed();
+    int speedOfSecPokemon = p2.getSpeed();
+    if (speedOfFirstPokemon < speedOfSecPokemon){
+      fasterPokemon = p2;
+      slowerPokemon = p1;
+    }
+    else if (speedOfFirstPokemon > speedOfSecPokemon) {
+      fasterPokemon = p1;
+      slowerPokemon = p2;
+    }
+    else{
+      fasterPokemon = p1;
+      slowerPokemon = p2;
+    }
     System.out.println("A wild " + p2 + " has appeared! I choose you, " + p1);
     int turn = 0;
     while(p1.getHp() > 0 && p2.getHp() > 0){
       if(turn % 2 == 0){
-        turn(p1, p2);
+        turn(fasterPokemon, slowerPokemon);
       }
       else{
-        turn(p2, p1);
+        turn(slowerPokemon, fasterPokemon);
       }
         turn++;
     }

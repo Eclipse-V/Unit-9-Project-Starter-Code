@@ -5,14 +5,16 @@ public class Pokemon{
     int defense;
     String type;
     Move[] moveList;
+    int speed;
   
-    public Pokemon(String n, int hp, int attack, int defense, String type, Move[] moves){
+    public Pokemon(String n, int hp, int attack, int defense, String type, int speed, Move[] moves){
       this.name = n;
       this.hp = hp;
       this.attack = attack;
       this.defense = defense;
       this.type = type;
       this.moveList = moves;
+      this.speed = speed;
     }
   
     public int getHp(){
@@ -41,6 +43,10 @@ public class Pokemon{
   
     public int typeAdjustment(){
       return 0;
+    }
+
+    public int getSpeed(){
+      return this.speed;
     }
   
     public String toString(){
