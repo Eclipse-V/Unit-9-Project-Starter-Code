@@ -32,27 +32,27 @@ public class Move{
       this.level = 1;
     }
 
-    public Move(String n, int p, String t, int a, int l){
+    public Move(String n, int p, String t, int a){
       this.name = n;
       this.power = p;
       this.type = t;
       this.accuracyPercentage = a;
-      this.level = l;
     }
   
     //depending on the level of the Pokemon's move, increases chances to get a crit hit
     public double critChance(){
+      int randomLevel = (int) (Math.random() * 4) + 1;
       double critChance = 0.0;
-        if (level == 1){
+        if (randomLevel == 1){
           critChance = 6.25;
         }
-        else if(level == 2){
+        else if(randomLevel == 2){
           critChance = 12.5;
         }
-        else if(level == 3){
+        else if(randomLevel == 3){
           critChance = 25;
         }
-        else{
+        else if(randomLevel == 4){
           critChance = 50;
         }
         return critChance;
